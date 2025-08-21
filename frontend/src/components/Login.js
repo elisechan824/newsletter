@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import api from '../utils/api'
 import { Link } from 'react-router-dom';
 
 const Login = () => {
@@ -10,11 +10,13 @@ const Login = () => {
     e.preventDefault();
     try {
       // send login request to backend
-      const response = await axios.post('http://localhost:5000/api/auth/login', {
+      const response = await api.post('/api/auth/login', {
         username,
         password,
       });
       
+      alert('Login successful!');
+
       // store JWT token in localStorage
       localStorage.setItem('token', response.data.token);
       

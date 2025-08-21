@@ -3,8 +3,8 @@ import axios from 'axios';
 // axios instance including JWT token
 const api = axios.create({
   baseURL: process.env.NODE_ENV === 'production' 
-    ? 'https://elisechan824.github.io/newsletter/' 
-    : 'http://localhost:3000',
+    ? 'https://newsletter-backend-5234.onrender.com' 
+    : 'http://localhost:5000',
 });
 
 // add JWT to every request

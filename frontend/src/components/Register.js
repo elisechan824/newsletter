@@ -1,21 +1,23 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import api from '../utils/api'
 import { Link } from 'react-router-dom';
 
 const Register = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [name, setName] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:5000/api/auth/register', {
+      await api.post('/api/auth/register', {
         username,
         password,
+        name,
       });
       alert('Registration successful!');
     } catch (error) {
-      alert('Registration failed!');
+      alert('Registration failed: ' + error.response.data.error + ', please try again.');
     }
   };
 
@@ -34,6 +36,12 @@ const Register = () => {
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+        />
+        <input
+          type="text"
+          placeholder="Name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
         />
         <button type="submit">Register</button>
       </form>
