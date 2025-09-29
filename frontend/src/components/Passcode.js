@@ -4,20 +4,14 @@ import { useNavigate } from 'react-router-dom';
 
 const Passcode = ({ onPasscodeValid }) => {
   const [passcode, setPasscode] = useState('');
-  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // validate passcode with backend
-      const response = await api.post('/api/auth/validate-passcode', { passcode });
-      if (response.data.success) {
-        navigate('/login');
-      } else {
-        alert('Invalid passcode!');
-      }
+      await api.post('/api/auth/validate-passcode', { passcode });
+      window.location = '/login';
     } catch (error) {
-      alert('Error validating passcode!');
+      alert(error.response.data.error);
       console.log(error)
     }
   };

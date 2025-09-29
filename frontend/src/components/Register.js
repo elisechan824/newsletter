@@ -16,6 +16,7 @@ const Register = () => {
         name,
       });
       alert('Registration successful!');
+      window.location = '/login';
     } catch (error) {
       alert('Registration failed: ' + error.response.data.error + ', please try again.');
     }

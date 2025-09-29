@@ -6,14 +6,20 @@ const User = require('../models/User')
 
 // passcode validation
 router.post('/validate-passcode', (req, res) => {
-  const { passcode } = req.body;
-  if (!passcode) {
-    return res.status(400).json({ error: "Passcode is required" });
-  }
-  if (passcode === process.env.PASSCODE) {
-    res.json({ success: true });
-  } else {
-    res.status(401).json({ success: false });
+  try {
+    const { passcode } = req.body;
+    if (!passcode) { // empty passcode
+      res.status(400).json({ error: "Passcode is required." });
+      console.log("empty passcode");
+    }
+    if (passcode === process.env.PASSCODE) { // correct passcode
+      res.status(201).json({ message: 'Success! You will be redirected to login.' });
+    } else { // incorrect passcode
+      res.status(401).json({ error: "Incorrect passcode. Please try again." });
+      console.log("false");
+    }
+  } catch (error) {
+    res.status(500).json({ error: 'Internal server error.' });
   }
 });
 
