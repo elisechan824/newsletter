@@ -6,13 +6,15 @@ import Register from './components/Register';
 import './App.css';
 
 function App() {
-
   return (
     <Router>
       <Routes>
         <Route path="/" element={<Passcode />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+
+        {/* Catch all */}
+        <Route path="*" element={<Passcode />} />
       </Routes>
     </Router>
   );
